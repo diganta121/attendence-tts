@@ -1,31 +1,18 @@
 # take attendence easily
-from gtts import gTTS
-from time import sleep
 import os
-import pyglet.media
 import csv
+import tkinter
 
-def speak(text):
-    # text to audio
-
-    tts = gTTS(text=text, tld="in", lang="en", slow=False, lang_check=False,timeout=10000)
-
-    filename = "temp.mp3"
-    tts.save(filename)
-
-    audio = pyglet.media.load(filename, streaming=False)
-    audio.play()
-
-    sleep(audio.duration)
-    os.remove(filename)
 
 def read_csv(filename):
     data = []
-
     with open(filename,'r') as f:
         rdr = csv.reader(f)
         for i in rdr:
-            data.append(i)
+            if rdr.line_num == 1:
+                continue
+            if len(i)>0:
+                data.append(i)
     return data
 
 def bin_search(data,c,x):
@@ -49,8 +36,11 @@ def mark_absent(data,reg_id):
     #get id using bin_search and update data
     pass
 
+def mark_present(data,reg_id):
+    pass
 
-
-
-filename = input("file name: ").strip()
+#filename = input("file name: ").strip()
+# TODO make ui using tkinter 
+# TODO input keyboard to do stuff
+# TODO UI to create 
 
